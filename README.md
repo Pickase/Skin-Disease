@@ -17,32 +17,35 @@ This model was trained after preprocessing steps including cleaning, label encod
 
 # Project Structure
 
+
+# 📁 Project Structure
+
 skin-disease/
 │
 ├── data/
-│   ├── raw/
-│   │   └── dataset_dermatology.csv
-│   └── processed/
-│       ├── train.csv
-│       └── test.csv
+│ ├── raw/
+│ │ └── dataset_dermatology.csv
+│ └── processed/
+│ ├── train.csv
+│ └── test.csv
 │
 ├── models/
-│   ├── xgb_model.pkl
-│   └── label_encoder.pkl
+│ ├── xgb_model.pkl
+│ └── label_encoder.pkl
 │
 ├── src/
-│   ├── config.py
-│   ├── utils.py
-│   ├── data_prep.py
-│   ├── features.py
-│   ├── pipelines.py
-│   ├── train.py
-│   ├── evaluate.py
-│   └── predict.py
-│   └── symptom_keywords.py
+│ ├── config.py
+│ ├── utils.py
+│ ├── data_prep.py
+│ ├── features.py
+│ ├── pipelines.py
+│ ├── train.py
+│ ├── evaluate.py
+│ └── predict.py
+│ └── symptom_keywords.py
 │
 ├── app/
-│   └── app.py
+│ └── app.py
 │
 ├── requirements.txt
 └── README.md
