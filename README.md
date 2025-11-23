@@ -16,7 +16,7 @@ This model was trained after preprocessing steps including cleaning, label encod
 ---
 
 # Project Structure
-'''
+
 skin-disease/
 │
 ├── data/
@@ -46,7 +46,7 @@ skin-disease/
 │
 ├── requirements.txt
 └── README.md
-'''
+
 ---
 
 # How the System Works
