@@ -1,20 +1,13 @@
-# Skin Disease Classification System (Keyword Filter + XGBoost Model)
+# Skin Disease Classification System
 
-This project is a complete machine learning pipeline for predicting skin diseases using the Dermatology dataset.
+This project implements a complete machine learning pipeline for predicting skin diseases using the Dermatology dataset. It combines a simple keyword-based symptom filter with a trained XGBoost model for final classification.
 
-It includes:
-
-1. **Keyword-Based Symptom Filter (basic string matching)**  
-   Users describe symptoms in text (e.g., “itchy red patches”).  
-   The system checks for matching words from predefined symptom lists to suggest possible diseases.  
-   This is NOT NLP or AI — just simple keyword matching for rough guidance.
-
-2. **XGBoost Machine Learning Model (final prediction)**  
-   The main ML model uses 34 clinical features to classify the skin disease with ~98% accuracy.
+A live demo of the project is available here:  
+https://skin-disease-1.streamlit.app/
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 skin-disease/
@@ -49,60 +42,60 @@ skin-disease/
 
 ---
 
-## How It Works
+## How the System Works
 
-### 1️⃣ Keyword-Based Screening  
-- Uses simple string matching  
-- Suggests top disease categories based on keywords  
-- Helps guide the user before entering detailed numeric features  
+### 1. Keyword-Based Screening
+Users can describe their symptoms in plain English.  
+The system performs keyword matching to suggest possible disease categories.  
+This step acts as a rough screening tool to guide the user before entering detailed clinical features.
 
-### 2️⃣ ML Classification (XGBoost)
-Dataset: Dermatology dataset with 34 features + 1 target class.
+### 2. Machine Learning Classification (XGBoost)
+The primary model uses 34 clinical and histopathological features to determine the exact disease class.
 
 Pipeline steps:
-- Replace "?" values  
-- Convert columns to numeric  
-- Remove duplicates  
-- Label Encoding  
-- Train-test split  
-- SMOTEENN oversampling  
-- Train tuned XGBoost model  
+- Replace invalid entries such as “?”
+- Convert features to numeric format
+- Remove duplicates
+- Label encode the target variable
+- Stratified train-test split
+- Apply SMOTEENN oversampling to balance classes
+- Train a tuned XGBoostClassifier
 
-Performance:  
-- **Train Accuracy:** ~100%  
-- **Test Accuracy:** ~98.2%  
+Performance from experimentation:
+- Train Accuracy: ~100%
+- Test Accuracy: ~98.2%
 
 ---
 
 ## Running the Project
 
-### Create virtual environment  
+### 1. Create and activate a virtual environment
 ```
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### Install dependencies  
+### 2. Install dependencies
 ```
 pip install -r requirements.txt
 ```
 
-### Prepare dataset  
+### 3. Prepare the dataset
 ```
 python -m src.data_prep
 ```
 
-### Train model  
+### 4. Train the model
 ```
 python -m src.train
 ```
 
-### Evaluate model  
+### 5. Evaluate the model
 ```
 python -m src.evaluate
 ```
 
-### Run Streamlit App  
+### 6. Launch the Streamlit Application
 ```
 streamlit run app/app.py
 ```
@@ -123,6 +116,13 @@ streamlit
 
 ---
 
-## Author  
+## Project Link
+
+Streamlit App:  
+https://skin-disease-1.streamlit.app/
+
+---
+
+## Author
 Pranav Joshi  
-Skin Disease Classification — Machine Learning Project
+Skin Disease Classification – Machine Learning Project
