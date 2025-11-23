@@ -1,152 +1,117 @@
-
 # Skin Disease Classification System (Keyword Filter + XGBoost Model)
 
-This project is a complete machine learning system for predicting skin diseases using the Dermatology dataset.  
+This project is a complete machine learning pipeline for predicting skin diseases using the Dermatology dataset.
+
 It includes:
 
-### 1. Keyword-Based Symptom Filter (Rough Screening)
-Users can type a short symptom description (e.g., “itchy red patches on knee”), and the system performs a simple keyword match against predefined lists.  
-This step provides a **rough idea** of which disease categories are likely based on the words used.  
-(Important: This is *not* NLP or AI — just basic keyword matching.)
+1. **Keyword-Based Symptom Filter (basic string matching)**  
+   Users describe symptoms in text (e.g., “itchy red patches”).  
+   The system checks for matching words from predefined symptom lists to suggest possible diseases.  
+   This is NOT NLP or AI — just simple keyword matching for rough guidance.
 
-### 2. XGBoost Machine Learning Model (Final Prediction)
-Users then enter 34 clinical features, and the trained XGBoost model predicts the exact disease class.  
-This model was trained after preprocessing steps including cleaning, label encoding, train-test split, and SMOTEENN oversampling.
+2. **XGBoost Machine Learning Model (final prediction)**  
+   The main ML model uses 34 clinical features to classify the skin disease with ~98% accuracy.
 
 ---
 
-# Project Structure
+## 📂 Project Structure
 
-
-# 📁 Project Structure
-
+```
 skin-disease/
-│
 ├── data/
-│ ├── raw/
-│ │ └── dataset_dermatology.csv
-│ └── processed/
-│ ├── train.csv
-│ └── test.csv
+│   ├── raw/
+│   │   └── dataset_dermatology.csv
+│   └── processed/
+│       ├── train.csv
+│       └── test.csv
 │
 ├── models/
-│ ├── xgb_model.pkl
-│ └── label_encoder.pkl
+│   ├── xgb_model.pkl
+│   └── label_encoder.pkl
 │
 ├── src/
-│ ├── config.py
-│ ├── utils.py
-│ ├── data_prep.py
-│ ├── features.py
-│ ├── pipelines.py
-│ ├── train.py
-│ ├── evaluate.py
-│ └── predict.py
-│ └── symptom_keywords.py
+│   ├── config.py
+│   ├── utils.py
+│   ├── data_prep.py
+│   ├── features.py
+│   ├── pipelines.py
+│   ├── train.py
+│   ├── evaluate.py
+│   ├── predict.py
+│   └── symptom_keywords.py
 │
 ├── app/
-│ └── app.py
+│   └── app.py
 │
 ├── requirements.txt
 └── README.md
+```
 
 ---
 
-# How the System Works
+## How It Works
 
-## **1️⃣ Keyword-Based Filter (Simple Matching)**  
-A dictionary of symptom keywords is used to match user text against diseases.  
-This is **not** machine learning / NLP — just straightforward string matching.
+### 1️⃣ Keyword-Based Screening  
+- Uses simple string matching  
+- Suggests top disease categories based on keywords  
+- Helps guide the user before entering detailed numeric features  
 
-It helps users:
-- understand possible directions  
-- identify common-sense connections  
-- prepare for the detailed ML input step  
+### 2️⃣ ML Classification (XGBoost)
+Dataset: Dermatology dataset with 34 features + 1 target class.
 
-Example Output:
-- Psoriasis (3 keyword matches)  
-- Eczema (2 matches)  
-- Dermatitis (1 match)
-
-This step is optional and only for guidance.
-
----
-
-## **2️⃣ Machine Learning Prediction (XGBoost)**
-
-The dataset includes:
-- 34 numeric features (clinical + histopathological)
-- “class” as the target label
-
-### Preprocessing steps:
+Pipeline steps:
 - Replace "?" values  
-- Convert all features to numeric  
+- Convert columns to numeric  
 - Remove duplicates  
-- Label encoding  
+- Label Encoding  
 - Train-test split  
-- SMOTEENN oversampling (to balance classes)
+- SMOTEENN oversampling  
+- Train tuned XGBoost model  
 
-### Model used:
-`XGBClassifier` with tuned parameters.
-
-### Achieved Accuracy (From Notebook):
-- **Training accuracy:** ~1.00  
-- **Test accuracy:** ~0.982  
-
-This model was chosen because it provided the best combination of:
-- High accuracy  
-- Stability  
-- Fast performance  
-- Good generalization  
+Performance:  
+- **Train Accuracy:** ~100%  
+- **Test Accuracy:** ~98.2%  
 
 ---
 
-# Running the Project
+## Running the Project
 
-## 1️⃣ Create a virtual environment
-
-
+### Create virtual environment  
+```
 python3 -m venv venv
 source venv/bin/activate
+```
 
-
-## 2️⃣ Install dependencies
-
-
+### Install dependencies  
+```
 pip install -r requirements.txt
+```
 
-
-## 3️⃣ Prepare the data
-
-
+### Prepare dataset  
+```
 python -m src.data_prep
+```
 
-
-## 4️⃣ Train the model
-
+### Train model  
+```
 python -m src.train
+```
 
-## 5️⃣ Evaluate the model
-
-
-
+### Evaluate model  
+```
 python -m src.evaluate
+```
 
-
-
-## 6️⃣ Run Streamlit App
-
-
-
+### Run Streamlit App  
+```
 streamlit run app/app.py
-
-
+```
 
 ---
 
-# Requirements
+## Requirements
 
-
+```
 pandas
 numpy
 scikit-learn
@@ -154,12 +119,10 @@ xgboost
 imblearn
 joblib
 streamlit
-
-
+```
 
 ---
 
-# Author  
+## Author  
 Pranav Joshi  
 Skin Disease Classification — Machine Learning Project
-
