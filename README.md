@@ -1,61 +1,100 @@
-# Hybrid Skin Disease Diagnosis System (Machine Learning)
 
-This project is a complete end-to-end Skin Disease Diagnostic System that combines:
+# Skin Disease Classification System (Keyword Filter + XGBoost Model)
 
-### **1. NLP-Based Symptom Keyword Screening (Rough Diagnosis)**  
-The user enters a natural-language description of their symptoms (e.g., “itchy red patches on elbow, dryness”).  
-A custom keyword-matching AI maps this text to likely diseases such as Psoriasis, Eczema, Lichen Planus, etc.
+This project is a complete machine learning system for predicting skin diseases using the Dermatology dataset.  
+It includes:
 
-### **2. ML-Based Structured Diagnosis (Final Prediction)**  
-For a precise diagnosis, the system uses a trained **XGBoost model** built on the Dermatology dataset.  
-The model uses **34 clinical + histopathological features** to identify the exact skin disease category with ~98% test accuracy.
+### 1. Keyword-Based Symptom Filter (Rough Screening)
+Users can type a short symptom description (e.g., “itchy red patches on knee”), and the system performs a simple keyword match against predefined lists.  
+This step provides a **rough idea** of which disease categories are likely based on the words used.  
+(Important: This is *not* NLP or AI — just basic keyword matching.)
 
-This hybrid approach provides both:
-- an **easy-to-use AI assistant**, and  
-- a **high-accuracy medical ML model**,  
-similar to real-world clinical triage systems.
+### 2. XGBoost Machine Learning Model (Final Prediction)
+Users then enter 34 clinical features, and the trained XGBoost model predicts the exact disease class.  
+This model was trained after preprocessing steps including cleaning, label encoding, train-test split, and SMOTEENN oversampling.
 
+---
+
+# Project Structure
+
+skin-disease/
+│
+├── data/
+│   ├── raw/
+│   │   └── dataset_dermatology.csv
+│   └── processed/
+│       ├── train.csv
+│       └── test.csv
+│
+├── models/
+│   ├── xgb_model.pkl
+│   └── label_encoder.pkl
+│
+├── src/
+│   ├── config.py
+│   ├── utils.py
+│   ├── data_prep.py
+│   ├── features.py
+│   ├── pipelines.py
+│   ├── train.py
+│   ├── evaluate.py
+│   └── predict.py
+│   └── symptom_keywords.py
+│
+├── app/
+│   └── app.py
+│
+├── requirements.txt
+└── README.md
+
+---
 
 # How the System Works
 
-## **🔹 Stage 1 — Rough NLP Screening**
-- User enters a symptom description in plain English  
-- A custom dictionary of medical keywords maps the text to possible diseases  
-- The app returns the **Top 3 predicted conditions** based on keyword match score  
-- Helps guide the user before entering numerical symptoms
+## **1️⃣ Keyword-Based Filter (Simple Matching)**  
+A dictionary of symptom keywords is used to match user text against diseases.  
+This is **not** machine learning / NLP — just straightforward string matching.
 
-### Example Input:
-> "itchy red patches and dryness on elbows"
+It helps users:
+- understand possible directions  
+- identify common-sense connections  
+- prepare for the detailed ML input step  
 
-### Example Output:
+Example Output:
 - Psoriasis (3 keyword matches)  
 - Eczema (2 matches)  
 - Dermatitis (1 match)
 
+This step is optional and only for guidance.
+
 ---
 
-## **🔹 Stage 2 — Precise ML Diagnosis**
-The system uses the processed dataset to train a model on:
+## **2️⃣ Machine Learning Prediction (XGBoost)**
 
-- 34 numeric clinical features  
-- 1 target column (`class`)
+The dataset includes:
+- 34 numeric features (clinical + histopathological)
+- “class” as the target label
 
-The workflow:
+### Preprocessing steps:
+- Replace "?" values  
+- Convert all features to numeric  
+- Remove duplicates  
+- Label encoding  
+- Train-test split  
+- SMOTEENN oversampling (to balance classes)
 
-1. Data cleaning  
-2. Replace “?” values  
-3. Label encoding  
-4. Train-test split  
-5. SMOTEENN (oversampling + noise cleaning)  
-6. Train **XGBoostClassifier with tuned parameters**  
-7. Save model + label encoder  
-8. Evaluate accuracy  
+### Model used:
+`XGBClassifier` with tuned parameters.
 
-### Best model performance:
-- **Train Accuracy:** ~1.00  
-- **Test Accuracy:** ~0.982  
-- **Top 3 models:** XGBoost, ANN, Gradient Boosting  
-- **Chosen model:** **XGBoost (best balance of speed + accuracy + stability)**
+### Achieved Accuracy (From Notebook):
+- **Training accuracy:** ~1.00  
+- **Test accuracy:** ~0.982  
+
+This model was chosen because it provided the best combination of:
+- High accuracy  
+- Stability  
+- Fast performance  
+- Good generalization  
 
 ---
 
@@ -63,16 +102,19 @@ The workflow:
 
 ## 1️⃣ Create a virtual environment
 
+
 python3 -m venv venv
 source venv/bin/activate
 
 
 ## 2️⃣ Install dependencies
 
+
 pip install -r requirements.txt
 
 
 ## 3️⃣ Prepare the data
+
 
 python -m src.data_prep
 
@@ -81,45 +123,26 @@ python -m src.data_prep
 
 python -m src.train
 
-
 ## 5️⃣ Evaluate the model
+
+
 
 python -m src.evaluate
 
 
-## 6️⃣ Run the Streamlit App
+
+## 6️⃣ Run Streamlit App
+
+
 
 streamlit run app/app.py
 
 
----
-
-# Features
- 
-### XGBoost tuned model  
-### SMOTEENN oversampling  
-### Clean modular Python package  
-### Reproducible ML pipeline  
-### Streamlit UI for diagnosis  
-### Ready for deployment & GitHub  
 
 ---
 
-# Technologies Used
+# Requirements
 
-- **Python 3.12**  
-- **pandas**  
-- **numpy**  
-- **scikit-learn**  
-- **XGBoost**  
-- **imblearn (SMOTEENN)**  
-- **joblib**  
-- **Streamlit**  
-
-
----
-
-# requirements.txt
 
 pandas
 numpy
@@ -130,11 +153,10 @@ joblib
 streamlit
 
 
+
 ---
 
-# 👤 Author  
+# Author  
 Pranav Joshi  
-ML Skin Disease Diagnostic System  
-
----
+Skin Disease Classification — Machine Learning Project
 
