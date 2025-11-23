@@ -15,42 +15,6 @@ This hybrid approach provides both:
 - a **high-accuracy medical ML model**,  
 similar to real-world clinical triage systems.
 
----
-
-# Project Structure
-
-skin-disease/
-│
-├── data/
-│ ├── raw/
-│ │ └── dataset_dermatology.csv
-│ └── processed/
-│ ├── train.csv
-│ └── test.csv
-│
-├── models/
-│ ├── xgb_model.pkl
-│ └── label_encoder.pkl
-│
-├── src/
-│ ├── config.py
-│ ├── utils.py
-│ ├── data_prep.py
-│ ├── features.py
-│ ├── pipelines.py
-│ ├── train.py
-│ ├── evaluate.py
-│ ├── predict.py
-│ └── symptom_keywords.py
-│
-├── app/
-│ └── app.py
-│
-├── requirements.txt
-└── README.md
-
-
----
 
 # How the System Works
 
