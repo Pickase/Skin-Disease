@@ -1,4 +1,4 @@
-# Hybrid Skin Disease Diagnosis System (AI + Machine Learning)
+# Hybrid Skin Disease Diagnosis System (Machine Learning)
 
 This project is a complete end-to-end Skin Disease Diagnostic System that combines:
 
